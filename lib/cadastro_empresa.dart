@@ -1,134 +1,19 @@
-// import 'package:bate_ponto_web/comum/celular.dart';
-// import 'package:bate_ponto_web/comum/nome_completo.dart';
-// import 'package:bate_ponto_web/comum/razao_social.dart';
-// import 'package:flutter/material.dart';
-// import 'package:bate_ponto_web/comum/cnpj.dart';
-// import 'package:bate_ponto_web/comum/cpf.dart';
-// import 'package:bate_ponto_web/comum/senha.dart';
-// import 'package:bate_ponto_web/comum/email.dart';
-
-// class CadastroEmpresa extends StatefulWidget {
-//   static String tag = 'cadastro-empresa';
-//   @override
-//   _CadastroEmpresaState createState() => new _CadastroEmpresaState();
-// }
-
-// class _CadastroEmpresaState extends State<CadastroEmpresa> {
-//   final scaffoldKey = new GlobalKey<ScaffoldState>();
-//   final formKey = new GlobalKey<FormState>();
-//   // Detalhes da empresa
-//   final TextEditingController _cnpj = TextEditingController();
-//   final TextEditingController _razaoSocial = TextEditingController();
-//   // Detalhes da pessoa física
-//   final TextEditingController _cpf = TextEditingController();
-//   final TextEditingController _nomeCompleto = TextEditingController();
-//   final TextEditingController _celular = TextEditingController();
-//   // Dados de acesso
-//   final TextEditingController _email = TextEditingController();
-//   final TextEditingController _senha = TextEditingController();
-
-//   @override
-//   void initState() {
-//     // TODO: implement initState
-//     super.initState();
-//   }
-
-//   @override
-//   void dispose() {
-//     // TODO: implement dispose
-//     super.dispose();
-//   }
-
-//   void _submit() {
-//     final form = formKey.currentState;
-//     if (form.validate()) {
-//       form.save();
-//       performLogin();
-//     }
-//   }
-
-//   void performLogin() {
-//     final snackbar = new SnackBar(
-//       content: new Text(
-//         "E-mail: ${_email.text}, senha: ${_senha.text}",
-//       ),
-//     );
-//     scaffoldKey.currentState.showSnackBar(snackbar);
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final titulo = new Text(
-//       "Cadastrar empresa",
-//       textAlign: TextAlign.center,
-//       style: new TextStyle(
-//         fontWeight: FontWeight.w500,
-//         fontSize: 25.0,
-//       ),
-//     );
-
-//     final cadastrar = new RaisedButton(
-//       child: new Text(
-//         "Cadastrar",
-//         style: new TextStyle(color: Colors.white),
-//       ),
-//       color: Colors.blue,
-//       onPressed: _submit,
-//     );
-
-//     final formulario = new Form(
-//       key: formKey,
-//       child: new ListView(
-//         children: <Widget>[
-//           titulo,
-//           new Padding(
-//             padding: const EdgeInsets.only(
-//               top: 50.0,
-//             ),
-//           ),
-//           new Cnpj(controller: _cnpj),
-//           new RazaoSocial(controller: _razaoSocial),
-//           new Cpf(controller: _cpf),
-//           new NomeCompleto(controller: _nomeCompleto),
-//           new Celular(controller: _celular),
-//           new Email(controller: _email),
-//           new Senha(controller: _senha),
-//           new Padding(
-//             padding: const EdgeInsets.only(
-//               top: 20.0,
-//             ),
-//           ),
-//           cadastrar
-//         ],
-//       ),
-//     );
-
-//     return new Scaffold(
-//       key: scaffoldKey,
-//       body: new Padding(
-//         padding: const EdgeInsets.all(20.0),
-//         child: Center(
-//           child: Container(
-//             constraints: BoxConstraints(maxWidth: 350),
-//             child: formulario,
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-import 'package:bate_ponto_web/comum/celular.dart';
-import 'package:bate_ponto_web/comum/nome_completo.dart';
-import 'package:bate_ponto_web/comum/razao_social.dart';
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:bate_ponto_web/comum/cnpj.dart';
-import 'package:bate_ponto_web/comum/cpf.dart';
-import 'package:bate_ponto_web/comum/senha.dart';
-import 'package:bate_ponto_web/comum/email.dart';
+import 'package:http/http.dart' as http;
+import 'comum/widgets/celular.dart';
+import 'comum/widgets/nome_completo.dart';
+import 'comum/widgets/razao_social.dart';
+import 'comum/widgets/cnpj.dart';
+import 'comum/widgets/cpf.dart';
+import 'comum/widgets/senha.dart';
+import 'comum/widgets/email.dart';
+
+import 'comum/funcoes/exibe_alerta.dart';
+import 'login.dart';
 
 class CadastroEmpresa extends StatefulWidget {
-  static String tag = 'cadastro-empresa';
+  static String rota = '/cadastro-empresa';
   @override
   _CadastroEmpresaState createState() => new _CadastroEmpresaState();
 }
@@ -147,20 +32,8 @@ class _CadastroEmpresaState extends State<CadastroEmpresa> {
   final TextEditingController _email = TextEditingController();
   final TextEditingController _senha = TextEditingController();
 
-  final int NUMERO_PASSOS = 3;
+  static const int NUMERO_PASSOS = 3;
   int _currentStep = 0;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-  }
 
   void _proximoPasso() {
     final form = formKey.currentState;
@@ -184,17 +57,45 @@ class _CadastroEmpresaState extends State<CadastroEmpresa> {
     final form = formKey.currentState;
     if (form.validate()) {
       form.save();
-      performLogin();
+      _cadastrarEmpresa();
     }
   }
 
-  void performLogin() {
-    final snackbar = new SnackBar(
-      content: new Text(
-        "E-mail: ${_email.text}, senha: ${_senha.text}",
-      ),
+  void _cadastrarEmpresa() async {
+    final url = "https://bate-ponto-backend.herokuapp.com/empresas";
+
+    Map<String, String> body = {
+      'cnpj': _cnpj.text,
+      'razao_social': _razaoSocial.text,
+      'cpf': _cpf.text,
+      'nome': _nomeCompleto.text,
+      'email': _email.text,
+      'senha': _senha.text,
+      'celular': _celular.text
+    };
+
+    final response = await http.post(
+      url,
+      body: body,
     );
-    scaffoldKey.currentState.showSnackBar(snackbar);
+    final responseJson = json.decode(response.body);
+    if (response.statusCode == 201) {
+      exibeAlerta(
+        contexto: context,
+        titulo: "Tudo certo",
+        mensagem:
+            "A empresa foi cadastrada! Não esqueça de conferir seu e-mail.",
+        labelBotao: "Fazer login",
+        evento: () => Navigator.of(context).pushNamed(Login.rota),
+      );
+    } else {
+      exibeAlerta(
+        contexto: context,
+        titulo: "Opa",
+        mensagem: responseJson["erro"],
+        labelBotao: "Tentar novamente",
+      );
+    }
   }
 
   @override
@@ -205,7 +106,7 @@ class _CadastroEmpresaState extends State<CadastroEmpresa> {
         padding: const EdgeInsets.only(top: 16.0),
         child: Row(
           mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             FlatButton.icon(
               icon: Icon(Icons.navigate_before),
@@ -233,7 +134,7 @@ class _CadastroEmpresaState extends State<CadastroEmpresa> {
     Widget _formulario(List<Widget> campos, double largura) {
       return new Center(
         child: new Container(
-          constraints: BoxConstraints(maxWidth: largura),
+          // constraints: BoxConstraints(maxWidth: largura),
           child: new Form(
             key: formKey,
             child: new Column(
@@ -309,7 +210,7 @@ class _CadastroEmpresaState extends State<CadastroEmpresa> {
       key: scaffoldKey,
       body: new Center(
         child: new Container(
-          constraints: BoxConstraints(maxWidth: 600),
+          constraints: BoxConstraints(maxWidth: 700),
           child: new Padding(
             padding: const EdgeInsets.all(20.0),
             child: stepper,

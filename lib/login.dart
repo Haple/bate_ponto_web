@@ -1,10 +1,15 @@
-import 'package:bate_ponto_web/comum/email.dart';
-import 'package:bate_ponto_web/comum/senha.dart';
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:bate_ponto_web/empregados.dart';
+import 'package:http/http.dart' as http;
+import 'package:hive/hive.dart';
+import 'comum/funcoes/exibe_alerta.dart';
+import 'comum/widgets/email.dart';
+import 'comum/widgets/senha.dart';
 import 'cadastro_empresa.dart';
 
 class Login extends StatefulWidget {
-  static String tag = 'login';
+  static String rota = '/login';
   @override
   _LoginState createState() => new _LoginState();
 }
@@ -16,20 +21,54 @@ class _LoginState extends State<Login> {
   final TextEditingController _email = TextEditingController();
   final TextEditingController _senha = TextEditingController();
 
-  void _submit() {
+  @override
+  void initState() {
+    super.initState();
+    _checaUsuarioLogado();
+  }
+
+  void _checaUsuarioLogado() async {
+    var box = await Hive.openBox('myBox');
+    var token = box.get('token');
+    if (token != null) {
+      Navigator.of(context).pushNamed(Empregados.rota);
+    }
+  }
+
+  void _entrar() async {
     final form = formKey.currentState;
 
     if (form.validate()) {
       form.save();
-      performLogin();
+      _login();
     }
   }
 
-  void performLogin() {
-    final snackbar = new SnackBar(
-      content: new Text("Email : ${_email.text}, password : ${_senha.text}"),
+  void _login() async {
+    final url = "https://bate-ponto-backend.herokuapp.com/sessoes";
+
+    Map<String, String> body = {
+      'email': _email.text,
+      'senha': _senha.text,
+    };
+
+    final response = await http.post(
+      url,
+      body: body,
     );
-    scaffoldKey.currentState.showSnackBar(snackbar);
+    if (response.statusCode == 200) {
+      final responseJson = json.decode(response.body);
+      var box = await Hive.openBox('myBox');
+      box.put('token', responseJson["token"]);
+      Navigator.of(context).popAndPushNamed(Empregados.rota);
+    } else {
+      exibeAlerta(
+        contexto: context,
+        titulo: "Opa",
+        mensagem: "Credenciais inválidas",
+        labelBotao: "Tentar novamente",
+      );
+    }
   }
 
   @override
@@ -49,7 +88,7 @@ class _LoginState extends State<Login> {
         style: new TextStyle(color: Colors.white),
       ),
       color: Colors.blue,
-      onPressed: _submit,
+      onPressed: _entrar,
     );
 
     final labelCadastrar = FlatButton(
@@ -58,7 +97,7 @@ class _LoginState extends State<Login> {
         style: TextStyle(color: Colors.black54),
       ),
       onPressed: () {
-        Navigator.of(context).pushNamed(CadastroEmpresa.tag);
+        Navigator.of(context).pushNamed(CadastroEmpresa.rota);
       },
     );
 

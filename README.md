@@ -1,9 +1,19 @@
 # bate_ponto_web
 
+## Instalar dependências
+```
+flutter pub get
+```
+
+## Executar aplicação
+```
+flutter run -d chrome
+```
+
 # Tarefas
 
-- [ ] Cadastro empresa (Aleph)
-- [ ] Login admin (Aleph)
+- [X] Cadastro empresa (Aleph)
+- [X] Login admin (Aleph)
 - [ ] Listar abonos (Daniel)
 - [ ] Avaliar abono (Gabriel)
 - [ ] Cadastrar empregado (Aleph)
