@@ -16,8 +16,8 @@ flutter run -d chrome
 - [X] Login admin (Aleph)
 - [ ] Listar abonos (Daniel)
 - [ ] Avaliar abono (Gabriel)
-- [ ] Cadastrar empregado (Aleph)
-- [ ] Listar empregados (Aleph)
+- [X] Cadastrar empregado (Aleph)
+- [X] Listar empregados (Aleph)
 - [ ] (Opcional) Relatório de pontos
 - [ ] (Opcional) Enviar relatório automático
 - [ ] (Opcional) Alerta de atrasos
