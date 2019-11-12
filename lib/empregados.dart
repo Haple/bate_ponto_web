@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:bate_ponto_web/cadastro_empregado.dart';
+import 'package:bate_ponto_web/comum/funcoes/exibe_alerta.dart';
 import 'package:bate_ponto_web/comum/modelos/empregado.dart';
 import 'package:bate_ponto_web/edicao_empregado.dart';
 import 'package:flutter/material.dart';
@@ -39,12 +42,33 @@ class _EmpregadosState extends State<Empregados> {
     }
   }
 
-// exibeAlerta(
-//           contexto: context,
-//           titulo: "Opa",
-//           mensagem: "Não foi possível buscar os empregados",
-//           labelBotao: "Tentar novamente",
-//           evento: () => Navigator.of(context).popAndPushNamed(Empregados.rota));
+  Future<void> _deletarEmpregado(int codigo) async {
+    final url = "https://bate-ponto-backend.herokuapp.com/empregados/$codigo";
+    var token = await getToken();
+    Map<String, String> headers = {
+      'Authorization': token,
+    };
+    final response = await http.delete(url, headers: headers);
+    if (response.statusCode != 200) {
+      final responseJson = json.decode(response.body);
+      if (responseJson['erro'] != null)
+        exibeAlerta(
+          contexto: context,
+          titulo: "Opa",
+          mensagem: "${responseJson['erro']}",
+          labelBotao: "Tentar novamente",
+        );
+      else
+        exibeAlerta(
+          contexto: context,
+          titulo: "Opa",
+          mensagem: "Não foi possível deletar o empregado",
+          labelBotao: "Tentar novamente",
+        );
+    } else {
+      return setState(() {});
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -122,7 +146,16 @@ class _EmpregadosState extends State<Empregados> {
                           children: <Widget>[
                             FlatButton(
                               onPressed: () {
-                                // TODO: do something in here
+                                exibeConfirmacao(
+                                  contexto: context,
+                                  labelConfirmar: "Sim, quero deletar",
+                                  labelCancelar: "Cancelar",
+                                  titulo: "Opa",
+                                  mensagem:
+                                      "Quer mesmo deletar '${empregado.nome}'?",
+                                  eventoConfirmar: () =>
+                                      _deletarEmpregado(empregado.codigo),
+                                );
                               },
                               child: Text(
                                 "Deletar",

@@ -102,7 +102,7 @@ class JornadasState extends State<Jornadas> {
                   exibeConfirmacao(
                     contexto: context,
                     titulo: "Opa",
-                    mensagem: "Que realmente deletar essa jornada?",
+                    mensagem: "Que realmente deletar a jornada '$nome'?",
                     labelConfirmar: "Sim, quero deletar",
                     eventoConfirmar: () async {
                       await _deletarJornada(codigo);
