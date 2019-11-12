@@ -20,7 +20,7 @@ class _NomeCompletoState extends State<NomeCompleto> {
       controller: widget.controller,
       keyboardType: TextInputType.emailAddress,
       autofocus: false,
-      validator: (valor) => valor.isEmpty ? 'Razão social inválida' : null,
+      validator: (valor) => valor.isEmpty ? 'Nome é obrigatório' : null,
       decoration: new InputDecoration(
         labelText: "Nome completo",
       ),

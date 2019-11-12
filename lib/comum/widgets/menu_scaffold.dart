@@ -3,10 +3,15 @@ import 'package:flutter/material.dart';
 import 'menu.dart';
 
 class MenuScaffold extends StatelessWidget {
-  const MenuScaffold({@required this.body, @required this.pageTitle, Key key})
+  const MenuScaffold(
+      {@required this.body,
+      @required this.pageTitle,
+      this.floatButton,
+      Key key})
       : super(key: key);
 
   final Widget body;
+  final Widget floatButton;
   final String pageTitle;
 
   @override
@@ -20,6 +25,7 @@ class MenuScaffold extends StatelessWidget {
           ),
         Expanded(
           child: Scaffold(
+            floatingActionButton: floatButton,
             appBar: displayMobileLayout
                 ? AppBar(
                     automaticallyImplyLeading: displayMobileLayout,

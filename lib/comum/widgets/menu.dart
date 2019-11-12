@@ -1,4 +1,5 @@
 import 'package:bate_ponto_web/abonos.dart';
+import 'package:bate_ponto_web/comum/funcoes/get_token.dart';
 import 'package:bate_ponto_web/empregados.dart';
 import 'package:bate_ponto_web/login.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,14 @@ class _MenuState extends State<Menu> with RouteAware {
   @override
   void initState() {
     super.initState();
+    _buscaToken();
     _routeObserver = AppRouteObserver();
+  }
+
+  void _buscaToken() async {
+    if ((await getToken()) == null) {
+      await _navigateTo(context, Login.rota);
+    }
   }
 
   @override
@@ -53,7 +61,7 @@ class _MenuState extends State<Menu> with RouteAware {
       tag: 'logo',
       child: CircleAvatar(
         backgroundColor: Colors.transparent,
-        radius: 60.0,
+        radius: 55.0,
         child: Image.asset('assets/logo.png'),
       ),
     );
@@ -64,6 +72,7 @@ class _MenuState extends State<Menu> with RouteAware {
           Expanded(
             child: ListView(
               padding: EdgeInsets.zero,
+              // padding: EdgeInsets.all(10),
               children: [
                 logo,
                 ListTile(
@@ -107,7 +116,7 @@ class _MenuState extends State<Menu> with RouteAware {
     if (widget.permanentlyDisplay) {
       Navigator.pop(context);
     }
-    await Navigator.pushNamed(context, rota);
+    await Navigator.pushReplacementNamed(context, rota);
   }
 
   void _updateSelectedRoute() {

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:bate_ponto_web/comum/funcoes/parse_jwt.dart';
 import 'package:flutter/material.dart';
 import 'package:bate_ponto_web/empregados.dart';
 import 'package:http/http.dart' as http;
@@ -58,17 +59,21 @@ class _LoginState extends State<Login> {
     );
     if (response.statusCode == 200) {
       final responseJson = json.decode(response.body);
-      var box = await Hive.openBox('myBox');
-      box.put('token', responseJson["token"]);
-      Navigator.of(context).popAndPushNamed(Empregados.rota);
-    } else {
-      exibeAlerta(
-        contexto: context,
-        titulo: "Opa",
-        mensagem: "Credenciais inválidas",
-        labelBotao: "Tentar novamente",
-      );
+      var token = responseJson["token"];
+      var payload = parseJwt(token);
+      if (payload["admin"] == true) {
+        var box = await Hive.openBox('myBox');
+        box.put('token', token);
+        Navigator.of(context).popAndPushNamed(Empregados.rota);
+        return;
+      }
     }
+    exibeAlerta(
+      contexto: context,
+      titulo: "Opa",
+      mensagem: "Credenciais inválidas",
+      labelBotao: "Tentar novamente",
+    );
   }
 
   @override

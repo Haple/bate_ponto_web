@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 
 import 'comum/widgets/menu_scaffold.dart';
-import 'login.dart';
 
 class Abonos extends StatefulWidget {
   static String rota = '/abonos';
@@ -18,15 +16,6 @@ class _AbonosState extends State<Abonos> {
   @override
   void initState() {
     super.initState();
-    _checaUsuarioDeslogado();
-  }
-
-  void _checaUsuarioDeslogado() async {
-    var box = await Hive.openBox('myBox');
-    var token = box.get('token');
-    if (token == null) {
-      Navigator.of(context).pushNamed(Login.rota);
-    }
   }
 
   @override
