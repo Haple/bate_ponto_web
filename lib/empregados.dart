@@ -178,19 +178,57 @@ class _EmpregadosState extends State<Empregados> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text(
-                          "${empregado.nome}",
-                          style: Theme.of(context).textTheme.title,
-                        ),
-                        SizedBox(height: 8.0),
-                        Text(
-                          "CPF: ${empregado.cpf}",
-                          style: Theme.of(context).textTheme.body1,
-                        ),
-                        SizedBox(height: 8.0),
-                        Text(
-                          "E-mail: ${empregado.email}",
-                          style: Theme.of(context).textTheme.body1,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Container(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(
+                                    "${empregado.nome}",
+                                    style: Theme.of(context).textTheme.title,
+                                  ),
+                                  SizedBox(height: 8.0),
+                                  Text(
+                                    "CPF: ${empregado.cpf}",
+                                    style: Theme.of(context).textTheme.body1,
+                                  ),
+                                  SizedBox(height: 8.0),
+                                  Text(
+                                    "E-mail: ${empregado.email}",
+                                    style: Theme.of(context).textTheme.body1,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              alignment: Alignment.center,
+                              padding: EdgeInsets.all(10),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    "Saldo atual",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    (empregado.bancoHoras >= 0 ? "+" : "-") +
+                                        "${empregado.bancoHoras}",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 24,
+                                      color: empregado.bancoHoras >= 0
+                                          ? Colors.green
+                                          : Colors.red.shade500,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
