@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:bate_ponto_web/cadastro_empregado.dart';
 import 'package:bate_ponto_web/comum/funcoes/exibe_alerta.dart';
 import 'package:bate_ponto_web/comum/modelos/empregado.dart';
+import 'package:bate_ponto_web/comum/widgets/jornadas.dart';
 import 'package:bate_ponto_web/edicao_empregado.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -21,16 +22,24 @@ class Empregados extends StatefulWidget {
 class _EmpregadosState extends State<Empregados> {
   final scaffoldKey = new GlobalKey<ScaffoldState>();
   final formKey = new GlobalKey<FormState>();
+  final _jornadaKey = new GlobalKey<JornadasState>();
+  final TextEditingController _pesquisa = TextEditingController();
+
   var token = "";
+  var nome = "";
+  var codJornada = 0;
 
   @override
   void initState() {
     super.initState();
   }
 
-  Future<List<Empregado>> buscaEmpregados() async {
+  Future<List<Empregado>> buscaEmpregados({nome = '', codJornada = 0}) async {
     this.token = await getToken();
-    final url = "https://bate-ponto-backend.herokuapp.com/empregados";
+    final baseUrl = "https://bate-ponto-backend.herokuapp.com";
+    final url = "$baseUrl/empregados?nome=$nome" +
+        (codJornada > 0 ? "&cod_jornada=$codJornada" : "");
+
     Map<String, String> headers = {
       'Authorization': token,
     };
@@ -72,6 +81,27 @@ class _EmpregadosState extends State<Empregados> {
 
   @override
   Widget build(BuildContext context) {
+    final pesquisa = TextField(
+      controller: _pesquisa,
+      decoration: InputDecoration(
+        hintText: "Empregado",
+        suffixIcon: FlatButton(
+          child: Icon(Icons.search),
+          onPressed: () {
+            setState(() {
+              this.nome = _pesquisa.text;
+              this.codJornada = _jornadaKey.currentState.codigoJornada;
+            });
+          },
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(25.0),
+          ),
+        ),
+      ),
+    );
+
     return MenuScaffold(
       key: scaffoldKey,
       pageTitle: Empregados.titulo,
@@ -85,7 +115,7 @@ class _EmpregadosState extends State<Empregados> {
       ),
       body: SafeArea(
         child: FutureBuilder(
-          future: buscaEmpregados(),
+          future: buscaEmpregados(nome: this.nome, codJornada: this.codJornada),
           builder:
               (BuildContext context, AsyncSnapshot<List<Empregado>> snapshot) {
             if (snapshot == null || snapshot.hasError) {
@@ -94,7 +124,28 @@ class _EmpregadosState extends State<Empregados> {
               );
             } else if (snapshot.connectionState == ConnectionState.done) {
               List<Empregado> empregados = snapshot.data;
-              return _buildListaEmpregados(empregados);
+              Widget lista = _buildListaEmpregados(empregados);
+              return Padding(
+                padding: const EdgeInsets.symmetric(
+                    vertical: 10.0, horizontal: 16.0),
+                child: Column(
+                  children: <Widget>[
+                    pesquisa,
+                    Center(
+                      child: SizedBox(
+                        width: 300,
+                        child: Jornadas(
+                          key: _jornadaKey,
+                          valorInicial: this.codJornada,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: lista,
+                    ),
+                  ],
+                ),
+              );
             } else {
               return Center(
                 child: CircularProgressIndicator(),
