@@ -170,6 +170,8 @@ class _EmpregadosState extends State<Empregados> {
             itemBuilder: (context, index) {
               Empregado empregado = empregados[index];
               empregado.cpf = CPFValidator.format(empregado.cpf);
+              empregado.bancoHoras =
+                  new Duration(minutes: empregado.bancoHoras).inHours;
               return Padding(
                 padding: const EdgeInsets.only(top: 8.0),
                 child: Card(
