@@ -217,13 +217,13 @@ class _EmpregadosState extends State<Empregados> {
                                     ),
                                   ),
                                   Text(
-                                    (empregado.bancoHoras >= 0 ? "+" : "-") +
+                                    (empregado.bancoHoras >= 0 ? "+" : "") +
                                         "${empregado.bancoHoras}",
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontSize: 24,
                                       color: empregado.bancoHoras >= 0
-                                          ? Colors.green
+                                          ? Colors.green.shade500
                                           : Colors.red.shade500,
                                     ),
                                   ),
