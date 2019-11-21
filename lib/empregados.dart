@@ -1,10 +1,7 @@
-import 'dart:convert';
-
 import 'package:bate_ponto_web/cadastro_empregado.dart';
-import 'package:bate_ponto_web/comum/funcoes/exibe_alerta.dart';
 import 'package:bate_ponto_web/comum/modelos/empregado.dart';
+import 'package:bate_ponto_web/comum/widgets/cartao_empregado.dart';
 import 'package:bate_ponto_web/comum/widgets/jornadas.dart';
-import 'package:bate_ponto_web/edicao_empregado.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:bate_ponto_web/comum/funcoes/get_token.dart';
@@ -48,34 +45,6 @@ class _EmpregadosState extends State<Empregados> {
       return empregadosFromJson(response.body);
     } else {
       throw new Exception("Não foi possível buscar os empregados");
-    }
-  }
-
-  Future<void> _deletarEmpregado(int codigo) async {
-    final url = "https://bate-ponto-backend.herokuapp.com/empregados/$codigo";
-    var token = await getToken();
-    Map<String, String> headers = {
-      'Authorization': token,
-    };
-    final response = await http.delete(url, headers: headers);
-    if (response.statusCode != 200) {
-      final responseJson = json.decode(response.body);
-      if (responseJson['erro'] != null)
-        exibeAlerta(
-          contexto: context,
-          titulo: "Opa",
-          mensagem: "${responseJson['erro']}",
-          labelBotao: "Tentar novamente",
-        );
-      else
-        exibeAlerta(
-          contexto: context,
-          titulo: "Opa",
-          mensagem: "Não foi possível deletar o empregado",
-          labelBotao: "Tentar novamente",
-        );
-    } else {
-      return setState(() {});
     }
   }
 
@@ -179,104 +148,21 @@ class _EmpregadosState extends State<Empregados> {
                   new Duration(minutes: empregado.bancoHoras).inHours;
               return Padding(
                 padding: const EdgeInsets.only(top: 8.0),
-                child: Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Container(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(
-                                    "${empregado.nome}",
-                                    style: Theme.of(context).textTheme.title,
-                                  ),
-                                  SizedBox(height: 8.0),
-                                  Text(
-                                    "CPF: ${empregado.cpf}",
-                                    style: Theme.of(context).textTheme.body1,
-                                  ),
-                                  SizedBox(height: 8.0),
-                                  Text(
-                                    "E-mail: ${empregado.email}",
-                                    style: Theme.of(context).textTheme.body1,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              alignment: Alignment.center,
-                              padding: EdgeInsets.all(10),
-                              child: Column(
-                                children: [
-                                  Text(
-                                    "Saldo atual",
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text(
-                                    (empregado.bancoHoras >= 0 ? "+" : "") +
-                                        "${empregado.bancoHoras}",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 24,
-                                      color: empregado.bancoHoras >= 0
-                                          ? Colors.green.shade500
-                                          : Colors.red.shade500,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            FlatButton(
-                              onPressed: () {
-                                exibeConfirmacao(
-                                  contexto: context,
-                                  labelConfirmar: "Sim, quero deletar",
-                                  labelCancelar: "Cancelar",
-                                  titulo: "Opa",
-                                  mensagem:
-                                      "Quer mesmo deletar '${empregado.nome}'?",
-                                  eventoConfirmar: () =>
-                                      _deletarEmpregado(empregado.codigo),
-                                );
-                              },
-                              child: Text(
-                                "Deletar",
-                                style: TextStyle(color: Colors.red),
-                              ),
-                            ),
-                            FlatButton(
-                              onPressed: () {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return EdicaoEmpregado(
-                                    empregado: empregado,
-                                  );
-                                }));
-                              },
-                              child: Text(
-                                "Editar",
-                                style: TextStyle(color: Colors.blue),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+                child: Row(
+                  // crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: CartaoEmpregado(
+                        empregado: empregado,
+                      ),
                     ),
-                  ),
+                    IconButton(
+                      icon: Icon(Icons.history),
+                      tooltip: "Ver pontos",
+                      onPressed: () {},
+                    )
+                  ],
                 ),
               );
             },
