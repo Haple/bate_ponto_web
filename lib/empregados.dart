@@ -22,7 +22,6 @@ class _EmpregadosState extends State<Empregados> {
   final _jornadaKey = new GlobalKey<JornadasState>();
   final TextEditingController _pesquisa = TextEditingController();
 
-  var token = "";
   var nome = "";
   var codJornada = 0;
 
@@ -32,7 +31,7 @@ class _EmpregadosState extends State<Empregados> {
   }
 
   Future<List<Empregado>> buscaEmpregados({nome = '', codJornada = 0}) async {
-    this.token = await getToken();
+    final token = await getToken();
     final baseUrl = "https://bate-ponto-backend.herokuapp.com";
     final url = "$baseUrl/empregados?nome=$nome" +
         (codJornada > 0 ? "&cod_jornada=$codJornada" : "");
@@ -148,21 +147,8 @@ class _EmpregadosState extends State<Empregados> {
                   new Duration(minutes: empregado.bancoHoras).inHours;
               return Padding(
                 padding: const EdgeInsets.only(top: 8.0),
-                child: Row(
-                  // crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: CartaoEmpregado(
-                        empregado: empregado,
-                      ),
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.history),
-                      tooltip: "Ver pontos",
-                      onPressed: () {},
-                    )
-                  ],
+                child: CartaoEmpregado(
+                  empregado: empregado,
                 ),
               );
             },
