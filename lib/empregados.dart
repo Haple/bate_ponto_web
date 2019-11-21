@@ -81,24 +81,38 @@ class _EmpregadosState extends State<Empregados> {
 
   @override
   Widget build(BuildContext context) {
-    final pesquisa = TextField(
-      controller: _pesquisa,
-      decoration: InputDecoration(
-        hintText: "Empregado",
-        suffixIcon: FlatButton(
-          child: Icon(Icons.search),
-          onPressed: () {
-            setState(() {
-              this.nome = _pesquisa.text;
-              this.codJornada = _jornadaKey.currentState.codigoJornada;
-            });
-          },
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(25.0),
+    final pesquisa = SizedBox(
+      width: 700,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          SizedBox(
+            width: 200,
+            child: Jornadas(
+              key: _jornadaKey,
+              valorInicial: this.codJornada,
+              widgetCompleto: false,
+            ),
           ),
-        ),
+          SizedBox(
+            width: 450,
+            child: TextField(
+              controller: _pesquisa,
+              decoration: InputDecoration(
+                hintText: "Pesquisar empregado",
+                suffixIcon: FlatButton(
+                  child: Icon(Icons.search),
+                  onPressed: () {
+                    setState(() {
+                      this.nome = _pesquisa.text;
+                      this.codJornada = _jornadaKey.currentState.codigoJornada;
+                    });
+                  },
+                ),
+              ),
+            ),
+          )
+        ],
       ),
     );
 
@@ -131,15 +145,6 @@ class _EmpregadosState extends State<Empregados> {
                 child: Column(
                   children: <Widget>[
                     pesquisa,
-                    Center(
-                      child: SizedBox(
-                        width: 300,
-                        child: Jornadas(
-                          key: _jornadaKey,
-                          valorInicial: this.codJornada,
-                        ),
-                      ),
-                    ),
                     Expanded(
                       child: lista,
                     ),

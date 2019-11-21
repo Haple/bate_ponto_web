@@ -10,7 +10,12 @@ import 'add_jornada_dialog.dart';
 
 class Jornadas extends StatefulWidget {
   final int valorInicial;
-  const Jornadas({Key key, this.valorInicial = 0}) : super(key: key);
+  final bool widgetCompleto;
+  const Jornadas({
+    Key key,
+    this.valorInicial = 0,
+    this.widgetCompleto = true,
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => JornadasState();
@@ -96,21 +101,23 @@ class JornadasState extends State<Jornadas> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               new Text(nome),
-              new MaterialButton(
-                child: Icon(Icons.delete),
-                onPressed: () => {
-                  exibeConfirmacao(
-                    contexto: context,
-                    titulo: "Opa",
-                    mensagem: "Que realmente deletar a jornada '$nome'?",
-                    labelConfirmar: "Sim, quero deletar",
-                    eventoConfirmar: () async {
-                      await _deletarJornada(codigo);
-                    },
-                    labelCancelar: "Cancelar",
-                  )
-                },
-              )
+              widget.widgetCompleto
+                  ? new MaterialButton(
+                      child: Icon(Icons.delete),
+                      onPressed: () => {
+                        exibeConfirmacao(
+                          contexto: context,
+                          titulo: "Opa",
+                          mensagem: "Que realmente deletar a jornada '$nome'?",
+                          labelConfirmar: "Sim, quero deletar",
+                          eventoConfirmar: () async {
+                            await _deletarJornada(codigo);
+                          },
+                          labelCancelar: "Cancelar",
+                        )
+                      },
+                    )
+                  : new Text("")
             ],
           ),
           value: codigo,
@@ -126,15 +133,21 @@ class JornadasState extends State<Jornadas> {
               ),
             )
           });
-      items.add(new DropdownMenuItem(
-        child: botaoAddJornada,
-        value: 0,
-      ));
+      if (widget.widgetCompleto) {
+        items.add(new DropdownMenuItem(
+          child: botaoAddJornada,
+          value: 0,
+        ));
+      } else {
+        items.add(itemJornada(
+          nome: "Filtrar por jornada",
+          codigo: 0,
+        ));
+      }
 
       return DropdownButtonFormField(
         decoration: new InputDecoration(
-          labelText: "Jornada",
-          hintText: "Selecione a jornada",
+          contentPadding: EdgeInsets.all(0),
         ),
         items: items,
         value: codigoJornada,
