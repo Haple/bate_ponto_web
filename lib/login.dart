@@ -78,13 +78,9 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    final logo = Hero(
-      tag: 'logo',
-      child: CircleAvatar(
-        backgroundColor: Colors.transparent,
-        radius: 80.0,
-        child: Image.asset('assets/logo.png'),
-      ),
+    final logo = Image(
+      image: AssetImage("assets/logo.png"),
+      height: 125,
     );
 
     var botaoEntrar = new RaisedButton(
