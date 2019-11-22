@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:bate_ponto_web/comum/funcoes/exibe_alerta.dart';
 import 'package:bate_ponto_web/comum/funcoes/get_token.dart';
 import 'package:bate_ponto_web/comum/modelos/empregado.dart';
+import 'package:bate_ponto_web/comum/widgets/pontos_dialog.dart';
 import 'package:bate_ponto_web/edicao_empregado.dart';
 
 import 'package:flutter/material.dart';
@@ -86,7 +87,16 @@ class _CartaoEmpregadoState extends State<CartaoEmpregado> {
                       ),
                       PopupMenuItem(
                         child: ListTile(
-                          onTap: () {},
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return PontosDialog(
+                                  empregado: widget.empregado,
+                                );
+                              },
+                            );
+                          },
                           leading: Icon(Icons.history),
                           title: Text('Histórico de pontos'),
                         ),
