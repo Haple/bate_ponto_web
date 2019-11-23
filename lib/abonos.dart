@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:bate_ponto_web/comum/funcoes/get_token.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -79,7 +81,54 @@ Widget _buildListaAbonos(List<Abono> abonos) {
       constraints: BoxConstraints(
         maxWidth: 350,
       ),
-      child: new Text(abonos.toString()),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+        child:ListView.builder(
+          itemBuilder: (context, index) {
+            Abono abono = abonos[index];
+            return Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Container(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                    "${abono.nome}",
+                                    style: Theme.of(context).textTheme.title,
+                                  ),
+                                  SizedBox(height: 8.0),
+                                  Text(
+                                    "Descrição: ${abono.motivo}",
+                                    style: Theme.of(context).textTheme.body1,
+                                  ),
+                                  SizedBox(height: 8.0),
+                                  Text(
+                                    "Data Solicitada:",
+                                    style: Theme.of(context).textTheme.body1,
+                                  ),
+                              ]
+                            )
+                          )
+                        ]
+                      )
+                    ]
+                  )
+                )
+              )
+            );
+          },
+          itemCount: abonos.length,
+        ),
+      ),
     ),
   );
 }

@@ -4,25 +4,29 @@ class Abono {
   int codigo;
   String motivo;
   String anexo;
-  String data_solicitacao;
-  String data_abonada;
-  int cod_empregado;
+  String dataSolicitacao;
+  String dataAbonada;
+  String nome;
+  int codEmpregado;
+
 
   Abono({this.codigo,
       this.motivo,
       this.anexo,
-      this.data_solicitacao,
-      this.data_abonada,
-      this.cod_empregado});
+      this.dataSolicitacao,
+      this.dataAbonada,
+      this.codEmpregado,
+      this.nome});
 
   factory Abono.fromJson(Map<String, dynamic> map) {
     return Abono(
       codigo: map["codigo"],
       motivo: map["motivo"],
       anexo: map["anexo"],
-      data_solicitacao: map["data_solicitacao"],
-      data_abonada: map["data_abonada"],
-      cod_empregado: map["cod_empregado"]
+      dataSolicitacao: map["data_solicitacao"],
+      dataAbonada: map["data_abonada"],
+      codEmpregado: map["cod_empregado"],
+      nome: map["nome"]
     );
   }
 
@@ -31,16 +35,18 @@ class Abono {
       "codigo": codigo,
       "motivo": motivo,
       "anexo": anexo,
-      "data_solicitacao": data_solicitacao,
-      "data_abonada": data_abonada,
-      "cod_empregado": cod_empregado
+      "data_solicitacao": dataSolicitacao,
+      "data_abonada": dataAbonada,
+      "cod_empregado": codEmpregado,
+      "nome": nome
     };
   }
 
   @override
   String toString() {
     return 'Abono {codigo: $codigo, motivo: $motivo, anexo: $anexo' +
-        'data_solicitacao: $data_solicitacao, data_abonada: $data_abonada, cod_empregado: $cod_empregado}';
+        'data_solicitacao: $dataSolicitacao, data_abonada: $dataAbonada, cod_empregado: $codEmpregado,' +
+        'nome: $nome}';
   }
 }
 
