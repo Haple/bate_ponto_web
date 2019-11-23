@@ -57,13 +57,9 @@ class _MenuState extends State<Menu> with RouteAware {
 
   @override
   Widget build(BuildContext context) {
-    final logo = Hero(
-      tag: 'logo',
-      child: CircleAvatar(
-        backgroundColor: Colors.transparent,
-        radius: 55.0,
-        child: Image.asset('assets/logo.png'),
-      ),
+    final logo = Image(
+      image: AssetImage("assets/logo.png"),
+      height: 100,
     );
 
     return Drawer(

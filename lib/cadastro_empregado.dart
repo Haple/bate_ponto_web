@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:bate_ponto_web/comum/modelos/empregado.dart';
-import 'package:bate_ponto_web/comum/modelos/jornada.dart';
 import 'package:bate_ponto_web/comum/widgets/celular.dart';
 import 'package:bate_ponto_web/comum/widgets/cpf.dart';
 import 'package:bate_ponto_web/comum/widgets/jornadas.dart';
