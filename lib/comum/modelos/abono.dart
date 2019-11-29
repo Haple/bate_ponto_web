@@ -8,6 +8,8 @@ class Abono {
   String dataAbonada;
   String nome;
   int codEmpregado;
+  bool aprovado;
+  String avaliacao;
 
 
   Abono({this.codigo,
@@ -16,7 +18,9 @@ class Abono {
       this.dataSolicitacao,
       this.dataAbonada,
       this.codEmpregado,
-      this.nome});
+      this.nome,
+      this.aprovado,
+      this.avaliacao});
 
   factory Abono.fromJson(Map<String, dynamic> map) {
     return Abono(
@@ -26,7 +30,9 @@ class Abono {
       dataSolicitacao: map["data_solicitacao"],
       dataAbonada: map["data_abonada"],
       codEmpregado: map["cod_empregado"],
-      nome: map["nome"]
+      nome: map["nome"],
+      aprovado: map["aprovado"],
+      avaliacao: map["avaliacao"]
     );
   }
 
@@ -38,7 +44,9 @@ class Abono {
       "data_solicitacao": dataSolicitacao,
       "data_abonada": dataAbonada,
       "cod_empregado": codEmpregado,
-      "nome": nome
+      "nome": nome,
+      "aprovado": aprovado,
+      "avaliacao": avaliacao
     };
   }
 
@@ -46,7 +54,7 @@ class Abono {
   String toString() {
     return 'Abono {codigo: $codigo, motivo: $motivo, anexo: $anexo' +
         'data_solicitacao: $dataSolicitacao, data_abonada: $dataAbonada, cod_empregado: $codEmpregado,' +
-        'nome: $nome}';
+        'nome: $nome, aprovado: $aprovado, avaliacao: $avaliacao}';
   }
 }
 
