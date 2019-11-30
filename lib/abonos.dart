@@ -1,6 +1,11 @@
+import 'dart:convert';
+import 'dart:html' as html;
+import 'dart:ui';
+
 import 'package:bate_ponto_web/comum/funcoes/get_token.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'comum/modelos/abono.dart';
 import 'comum/widgets/add_avaliacao_dialog.dart';
 import 'comum/widgets/menu_scaffold.dart';
@@ -37,6 +42,34 @@ class AbonosState extends State<Abonos> {
     }
   }
 
+  Future _downloadAnexo(int codAbono) async {
+    final url =
+        "https://bate-ponto-backend.herokuapp.com/abonos/$codAbono/anexos";
+
+    Map<String, String> headers = {
+      'Authorization': await getToken(),
+    };
+
+    final response = await http.get(url, headers: headers);
+    print(response.body);
+    final jsonResponse = json.decode(response.body);
+    final anexoUrl = jsonResponse["url"];
+    final nomeOriginal = jsonResponse["anexo_original"];
+    if (response.statusCode == 200) {
+      print("$anexoUrl");
+      print("$nomeOriginal");
+      // html.window.open(anexoUrl, nomeOriginal);
+      html.window.location.replace(anexoUrl);
+    } else {
+      throw new Exception("Não foi possível baixar anexo");
+    }
+
+    // html.Element a = html.document.createElement("a");
+    // a.setAttribute("href", anexo);
+    // a.setAttribute("download", "anexoOOO.jpeg");
+    // a.click();
+  }
+
   Widget _buildListaAbonos(List<Abono> abonos) {
     return Center(
       child: Container(
@@ -49,6 +82,8 @@ class AbonosState extends State<Abonos> {
           child: ListView.builder(
             itemBuilder: (context, index) {
               Abono abono = abonos[index];
+              abono.dataAbonada = new DateFormat("dd/MM/yyyy")
+                  .format(DateTime.parse(abono.dataAbonada));
               return Padding(
                 padding: const EdgeInsets.only(top: 8.0),
                 child: Card(
@@ -65,8 +100,14 @@ class AbonosState extends State<Abonos> {
                               style: Theme.of(context).textTheme.title,
                             ),
                             IconButton(
-                              icon: Icon(Icons.cloud_download),
-                              onPressed: () {},
+                              icon: abono.anexo == null
+                                  ? Icon(Icons.cloud_off)
+                                  : Icon(Icons.cloud_download),
+                              onPressed: abono.anexo == null
+                                  ? () {}
+                                  : () async {
+                                      await _downloadAnexo(abono.codigo);
+                                    },
                             )
                           ],
                         ),
@@ -101,7 +142,8 @@ class AbonosState extends State<Abonos> {
                                       showDialog(
                                         context: context,
                                         builder: (BuildContext context) {
-                                          var addAvaliacaoDialog = AddAvaliacaoDialog(
+                                          var addAvaliacaoDialog =
+                                              AddAvaliacaoDialog(
                                             abonosState: this,
                                             aprovado: true,
                                             codAbono: abono.codigo,
@@ -133,7 +175,8 @@ class AbonosState extends State<Abonos> {
                                       showDialog(
                                         context: context,
                                         builder: (BuildContext context) {
-                                          var addAvaliacaoDialog = AddAvaliacaoDialog(
+                                          var addAvaliacaoDialog =
+                                              AddAvaliacaoDialog(
                                             abonosState: this,
                                             aprovado: false,
                                             codAbono: abono.codigo,
