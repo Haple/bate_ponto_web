@@ -22,7 +22,7 @@ class _CelularState extends State<Celular> {
       autofocus: false,
       validator: (valor) {
         Pattern pattern =
-            r'(\({0,1}\d{0,2}\){0,1} {0,1})(\d{4,5}) {0,1}-{0,1}(\d{4})';
+            r'^(\({0,1}\d{0,2}\){0,1} {0,1})(\d{4,5}) {0,1}-{0,1}(\d{4})$';
         RegExp regex = new RegExp(pattern);
         if (!regex.hasMatch(valor))
           return 'Celular inválido';
