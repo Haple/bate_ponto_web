@@ -24,7 +24,7 @@ class _CpfState extends State<Cpf> {
       keyboardType: TextInputType.emailAddress,
       autofocus: false,
       validator: (valor) =>
-          CPFValidator.isValid(valor) ? null : 'CNPJ inválido',
+          CPFValidator.isValid(valor) ? null : 'CPF inválido',
       style: widget.habilitado ? null : TextStyle(color: Colors.grey.shade500),
       decoration: new InputDecoration(
         enabled: widget.habilitado,
