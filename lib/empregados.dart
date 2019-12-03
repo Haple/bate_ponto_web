@@ -13,10 +13,10 @@ class Empregados extends StatefulWidget {
   static String titulo = 'Empregados';
 
   @override
-  _EmpregadosState createState() => new _EmpregadosState();
+  EmpregadosState createState() => new EmpregadosState();
 }
 
-class _EmpregadosState extends State<Empregados> {
+class EmpregadosState extends State<Empregados> {
   final scaffoldKey = new GlobalKey<ScaffoldState>();
   final formKey = new GlobalKey<FormState>();
   final _jornadaKey = new GlobalKey<JornadasState>();
@@ -149,6 +149,7 @@ class _EmpregadosState extends State<Empregados> {
                 padding: const EdgeInsets.only(top: 8.0),
                 child: CartaoEmpregado(
                   empregado: empregado,
+                  empregadosState: this,
                 ),
               );
             },
