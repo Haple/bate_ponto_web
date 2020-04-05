@@ -1,5 +1,30 @@
 # bate_ponto_web
 
+## Instalar Android SDK (Ubuntu)
+Não é necessário para o projeto web.
+
+## Instalar Flutter (Ubuntu)
+
+Clone o repositório do Flutter:
+```
+git clone https://github.com/flutter/flutter.git -b stable
+```
+
+Adicione essa linha no final do seu arquivo ~/.bashrc
+```
+export PATH="$PATH:CAMINHO_DA_PASTA_QUE_VC_CLONOU_O_FLUTTER/flutter/bin"
+```
+
+Execute:
+```
+flutter precache
+flutter channel beta
+flutter upgrade
+flutter config --enable-web
+
+```
+
+
 ## Instalar dependências
 ```
 flutter pub get
@@ -14,10 +39,10 @@ flutter run -d chrome
 
 - [X] Cadastro empresa (Aleph)
 - [X] Login admin (Aleph)
-- [ ] Listar abonos (Daniel)
-- [ ] Avaliar abono (Gabriel)
+- [X] Listar abonos (Daniel)
+- [X] Avaliar abono (Gabriel)
 - [X] Cadastrar empregado (Aleph)
 - [X] Listar empregados (Aleph)
-- [ ] (Opcional) Relatório de pontos
-- [ ] (Opcional) Enviar relatório automático
-- [ ] (Opcional) Alerta de atrasos
+- [ ] Relatório de pontos
+- [ ] Enviar relatório automático
+- [ ] Alerta de atrasos
