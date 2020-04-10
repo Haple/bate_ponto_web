@@ -1,12 +1,13 @@
 import 'dart:convert';
-import 'package:bate_ponto_web/comum/funcoes/parse_jwt.dart';
-import 'package:flutter/material.dart';
-import 'package:bate_ponto_web/empregados.dart';
 import 'package:http/http.dart' as http;
 import 'package:hive/hive.dart';
-import 'comum/funcoes/exibe_alerta.dart';
-import 'comum/widgets/email.dart';
-import 'comum/widgets/senha.dart';
+import 'package:flutter/material.dart';
+
+import '../funcoes/exibe_alerta.dart';
+import '../funcoes/parse_jwt.dart';
+import '../widgets/email.dart';
+import '../widgets/senha.dart';
+import 'empregados.dart';
 import 'cadastro_empresa.dart';
 
 class Login extends StatefulWidget {

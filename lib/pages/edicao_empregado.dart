@@ -1,18 +1,17 @@
 import 'dart:convert';
-
-import 'package:bate_ponto_web/comum/modelos/empregado.dart';
-import 'package:bate_ponto_web/comum/widgets/celular.dart';
-import 'package:bate_ponto_web/comum/widgets/cpf.dart';
-import 'package:bate_ponto_web/comum/widgets/jornadas.dart';
-import 'package:bate_ponto_web/comum/widgets/nome_completo.dart';
-import 'package:bate_ponto_web/empregados.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import 'comum/funcoes/exibe_alerta.dart';
-import 'comum/funcoes/get_token.dart';
-import 'comum/widgets/email.dart';
-import 'comum/widgets/menu_scaffold.dart';
+import '../funcoes/exibe_alerta.dart';
+import '../funcoes/get_token.dart';
+import '../widgets/celular.dart';
+import '../widgets/cpf.dart';
+import '../widgets/jornadas.dart';
+import '../widgets/nome_completo.dart';
+import '../widgets/email.dart';
+import '../widgets/menu_scaffold.dart';
+import '../modelos/empregado.dart';
+import 'empregados.dart';
 
 class EdicaoEmpregado extends StatefulWidget {
   final Empregado empregado;

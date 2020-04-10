@@ -1,11 +1,10 @@
 import 'dart:convert';
-
-import 'package:bate_ponto_web/comum/funcoes/exibe_alerta.dart';
-import 'package:bate_ponto_web/comum/funcoes/get_token.dart';
-import 'package:bate_ponto_web/comum/modelos/jornada.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import '../funcoes/exibe_alerta.dart';
+import '../funcoes/get_token.dart';
+import '../modelos/jornada.dart';
 import 'add_jornada_dialog.dart';
 
 class Jornadas extends StatefulWidget {

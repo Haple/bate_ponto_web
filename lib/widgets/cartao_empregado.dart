@@ -1,14 +1,13 @@
 import 'dart:convert';
-
-import 'package:bate_ponto_web/comum/funcoes/exibe_alerta.dart';
-import 'package:bate_ponto_web/comum/funcoes/get_token.dart';
-import 'package:bate_ponto_web/comum/modelos/empregado.dart';
-import 'package:bate_ponto_web/comum/widgets/pontos_dialog.dart';
-import 'package:bate_ponto_web/edicao_empregado.dart';
-import 'package:bate_ponto_web/empregados.dart';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+
+import '../funcoes/exibe_alerta.dart';
+import '../funcoes/get_token.dart';
+import '../pages/edicao_empregado.dart';
+import '../pages/empregados.dart';
+import '../modelos/empregado.dart';
+import 'pontos_dialog.dart';
 
 class CartaoEmpregado extends StatefulWidget {
   final Empregado empregado;

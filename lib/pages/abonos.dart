@@ -1,14 +1,14 @@
 import 'dart:convert';
 import 'dart:html' as html;
 import 'dart:ui';
-
-import 'package:bate_ponto_web/comum/funcoes/get_token.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
-import 'comum/modelos/abono.dart';
-import 'comum/widgets/add_avaliacao_dialog.dart';
-import 'comum/widgets/menu_scaffold.dart';
+
+import '../funcoes/get_token.dart';
+import '../modelos/abono.dart';
+import '../widgets/add_avaliacao_dialog.dart';
+import '../widgets/menu_scaffold.dart';
 
 class Abonos extends StatefulWidget {
   static String rota = '/abonos';

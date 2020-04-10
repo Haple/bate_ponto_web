@@ -1,7 +1,6 @@
 # bate_ponto_web
 
-## Instalar Android SDK (Ubuntu)
-Não é necessário para o projeto web.
+IDE: VS Code
 
 ## Instalar Flutter (Ubuntu)
 
@@ -24,7 +23,6 @@ flutter config --enable-web
 
 ```
 
-
 ## Instalar dependências
 ```
 flutter pub get
@@ -43,6 +41,7 @@ flutter run -d chrome
 - [X] Avaliar abono (Gabriel)
 - [X] Cadastrar empregado (Aleph)
 - [X] Listar empregados (Aleph)
+- [ ] Atrasos
 - [ ] Relatório de pontos
-- [ ] Enviar relatório automático
-- [ ] Alerta de atrasos
+- [ ] Configurações: Enviar relatório automático
+- [ ] Indicadores

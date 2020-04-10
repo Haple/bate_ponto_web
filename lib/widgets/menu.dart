@@ -1,11 +1,13 @@
-import 'package:bate_ponto_web/abonos.dart';
-import 'package:bate_ponto_web/comum/funcoes/get_token.dart';
-import 'package:bate_ponto_web/empregados.dart';
-import 'package:bate_ponto_web/login.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
+import '../funcoes/get_token.dart';
+import '../pages/abonos.dart';
+import '../pages/atrasos.dart';
+import '../pages/empregados.dart';
+import '../pages/login.dart';
 import 'app_route_observer.dart';
+
 
 class Menu extends StatefulWidget {
   const Menu({@required this.permanentlyDisplay, Key key}) : super(key: key);
@@ -62,6 +64,17 @@ class _MenuState extends State<Menu> with RouteAware {
       height: 100,
     );
 
+    Widget _buildItemMenu(IconData icone, String titulo, String rota) {
+      return ListTile(
+        leading: Icon(icone),
+        title: Text(titulo),
+        onTap: () async {
+          await _navigateTo(context, rota);
+        },
+        selected: _rotaSelecionada == rota,
+      );
+    }
+
     return Drawer(
       child: Row(
         children: [
@@ -71,22 +84,12 @@ class _MenuState extends State<Menu> with RouteAware {
               // padding: EdgeInsets.all(10),
               children: [
                 logo,
-                ListTile(
-                  leading: const Icon(Icons.people),
-                  title: Text(Empregados.titulo),
-                  onTap: () async {
-                    await _navigateTo(context, Empregados.rota);
-                  },
-                  selected: _rotaSelecionada == Empregados.rota,
-                ),
-                ListTile(
-                  leading: const Icon(Icons.question_answer),
-                  title: Text(Abonos.titulo),
-                  onTap: () async {
-                    await _navigateTo(context, Abonos.rota);
-                  },
-                  selected: _rotaSelecionada == Abonos.rota,
-                ),
+                _buildItemMenu(
+                    Icons.people, Empregados.titulo, Empregados.rota),
+                _buildItemMenu(
+                    Icons.question_answer, Abonos.titulo, Abonos.rota),
+                _buildItemMenu(
+                    Icons.alarm, Atrasos.titulo, Atrasos.rota),
                 const Divider(),
                 ListTile(
                     leading: const Icon(Icons.power_settings_new),

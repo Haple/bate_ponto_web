@@ -1,15 +1,15 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'comum/widgets/celular.dart';
-import 'comum/widgets/nome_completo.dart';
-import 'comum/widgets/razao_social.dart';
-import 'comum/widgets/cnpj.dart';
-import 'comum/widgets/cpf.dart';
-import 'comum/widgets/senha.dart';
-import 'comum/widgets/email.dart';
 
-import 'comum/funcoes/exibe_alerta.dart';
+import '../widgets/celular.dart';
+import '../widgets/nome_completo.dart';
+import '../widgets/razao_social.dart';
+import '../widgets/cnpj.dart';
+import '../widgets/cpf.dart';
+import '../widgets/senha.dart';
+import '../widgets/email.dart';
+import '../funcoes/exibe_alerta.dart';
 import 'login.dart';
 
 class CadastroEmpresa extends StatefulWidget {

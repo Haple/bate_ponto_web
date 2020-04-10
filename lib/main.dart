@@ -1,9 +1,10 @@
-import 'package:bate_ponto_web/comum/widgets/app_route_observer.dart';
-import 'package:bate_ponto_web/empregados.dart';
+import 'pages/atrasos.dart';
+import 'widgets/app_route_observer.dart';
+import 'pages/empregados.dart';
 import 'package:flutter/material.dart';
-import 'abonos.dart';
-import 'login.dart';
-import 'cadastro_empresa.dart';
+import 'pages/abonos.dart';
+import 'pages/login.dart';
+import 'pages/cadastro_empresa.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,6 +14,7 @@ class MyApp extends StatelessWidget {
     CadastroEmpresa.rota: (context) => CadastroEmpresa(),
     Empregados.rota: (context) => Empregados(),
     Abonos.rota: (context) => Abonos(),
+    Atrasos.rota: (context) => Atrasos(),
   };
 
   @override

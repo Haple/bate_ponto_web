@@ -1,12 +1,13 @@
-import 'package:bate_ponto_web/cadastro_empregado.dart';
-import 'package:bate_ponto_web/comum/modelos/empregado.dart';
-import 'package:bate_ponto_web/comum/widgets/cartao_empregado.dart';
-import 'package:bate_ponto_web/comum/widgets/jornadas.dart';
+import 'package:cpf_cnpj_validator/cpf_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:bate_ponto_web/comum/funcoes/get_token.dart';
-import 'comum/widgets/menu_scaffold.dart';
-import 'package:cpf_cnpj_validator/cpf_validator.dart';
+
+import '../widgets/cartao_empregado.dart';
+import '../widgets/jornadas.dart';
+import '../widgets/menu_scaffold.dart';
+import '../modelos/empregado.dart';
+import '../funcoes/get_token.dart';
+import 'cadastro_empregado.dart';
 
 class Empregados extends StatefulWidget {
   static String rota = '/empregados';

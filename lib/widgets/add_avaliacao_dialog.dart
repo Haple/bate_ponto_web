@@ -1,12 +1,12 @@
 import 'dart:convert';
-
-import 'package:bate_ponto_web/comum/funcoes/exibe_alerta.dart';
-import 'package:bate_ponto_web/comum/funcoes/get_token.dart';
-import 'package:bate_ponto_web/comum/modelos/abono.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../abonos.dart';
-import 'package:http/http.dart' as http;
+
+import '../funcoes/exibe_alerta.dart';
+import '../funcoes/get_token.dart';
+import '../modelos/abono.dart';
+import '../pages/abonos.dart';
 
 class AddAvaliacaoDialog extends StatefulWidget {
   final AbonosState abonosState;

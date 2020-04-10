@@ -1,9 +1,10 @@
-import 'package:bate_ponto_web/comum/funcoes/get_token.dart';
-import 'package:bate_ponto_web/comum/modelos/empregado.dart';
-import 'package:bate_ponto_web/comum/modelos/ponto.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+
+import '../funcoes/get_token.dart';
+import '../modelos/empregado.dart';
+import '../modelos/ponto.dart';
 
 class PontosDialog extends StatefulWidget {
   final Empregado empregado;
