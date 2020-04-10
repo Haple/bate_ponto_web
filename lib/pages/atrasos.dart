@@ -2,7 +2,6 @@ import 'package:bate_ponto_web/modelos/atraso.dart';
 import 'package:bate_ponto_web/widgets/cartao_atraso.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:intl/intl.dart';
 
 import '../widgets/menu_scaffold.dart';
 import '../funcoes/get_token.dart';
@@ -17,23 +16,18 @@ class Atrasos extends StatefulWidget {
 
 class AtrasosState extends State<Atrasos> {
   final scaffoldKey = new GlobalKey<ScaffoldState>();
-  final TextEditingController _dataInicial = TextEditingController();
-  final TextEditingController _dataFinal = TextEditingController();
-
-  var dataInicial = "";
-  var dataFinal = "";
 
   @override
   void initState() {
     super.initState();
   }
 
-  Future<List<Atraso>> buscaAtrasos({dataInicial, dataFinal}) async {
+  Future<List<Atraso>> buscaAtrasos() async {
     final token = await getToken();
     // final baseUrl = "https://bate-ponto-backend.herokuapp.com";
-    final baseUrl = "https://5e8fbe83fe7f2a00165ef56d.mockapi.io/bate-ponto/api/v1";
-    final url =
-        "$baseUrl/atrasos?dataInicial=$dataInicial&dataFinal=$dataFinal";
+    final baseUrl =
+        "https://5e8fbe83fe7f2a00165ef56d.mockapi.io/bate-ponto/api/v1";
+    final url = "$baseUrl/atrasos";
 
     Map<String, String> headers = {
       // 'Authorization': token,
@@ -48,52 +42,12 @@ class AtrasosState extends State<Atrasos> {
 
   @override
   Widget build(BuildContext context) {
-    final pesquisa = SizedBox(
-      width: 700,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          SizedBox(
-            width: 100,
-            child: TextField(
-              controller: _dataInicial,
-              decoration: InputDecoration(
-                hintText: "Data Inicial",
-              ),
-            ),
-          ),
-          SizedBox(
-            width: 100,
-            child: TextField(
-              controller: _dataFinal,
-              decoration: InputDecoration(
-                hintText: "Data Final",
-              ),
-            ),
-          ),
-          SizedBox(
-            width: 50,
-            child: FlatButton(
-              child: Icon(Icons.search),
-              onPressed: () {
-                setState(() {
-                  this.dataInicial = _dataInicial.text;
-                  this.dataFinal = _dataFinal.text;
-                });
-              },
-            ),
-          )
-        ],
-      ),
-    );
-
     return MenuScaffold(
       key: scaffoldKey,
       pageTitle: Atrasos.titulo,
       body: SafeArea(
         child: FutureBuilder(
-          future: buscaAtrasos(
-              dataInicial: this.dataInicial, dataFinal: this.dataFinal),
+          future: buscaAtrasos(),
           builder:
               (BuildContext context, AsyncSnapshot<List<Atraso>> snapshot) {
             if (snapshot == null || snapshot.hasError) {
@@ -105,10 +59,9 @@ class AtrasosState extends State<Atrasos> {
               Widget lista = _buildListaAtrasos(atrasos);
               return Padding(
                 padding: const EdgeInsets.symmetric(
-                    vertical: 10.0, horizontal: 16.0),
+                    vertical: 10.0, horizontal: 200.0),
                 child: Column(
                   children: <Widget>[
-                    pesquisa,
                     Expanded(
                       child: lista,
                     ),
@@ -137,13 +90,10 @@ class AtrasosState extends State<Atrasos> {
           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
           child: ListView.builder(
             itemBuilder: (context, index) {
-              Atraso atraso = atrasos[index];
-              atraso.dataHoraAtraso = new DateFormat("dd/MM/yyyy HH'h'mm")
-                  .format(DateTime.parse(atraso.dataHoraAtraso));
               return Padding(
                 padding: const EdgeInsets.only(top: 8.0),
                 child: CartaoAtraso(
-                  atraso: atraso,
+                  atraso: atrasos[index],
                 ),
               );
             },

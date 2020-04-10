@@ -1,6 +1,6 @@
 import 'package:bate_ponto_web/modelos/atraso.dart';
 import 'package:flutter/material.dart';
-
+import 'package:intl/intl.dart';
 
 class CartaoAtraso extends StatefulWidget {
   final Atraso atraso;
@@ -16,6 +16,11 @@ class CartaoAtraso extends StatefulWidget {
 class _CartaoAtrasoState extends State<CartaoAtraso> {
   @override
   Widget build(BuildContext context) {
+    final dataAtraso = new DateFormat("dd/MM/yyyy")
+        .format(DateTime.parse(widget.atraso.dataHoraAtraso));
+    final horaAtraso = new DateFormat("HH'h'mm")
+        .format(DateTime.parse(widget.atraso.dataHoraAtraso));
+
     return Card(
       child: Padding(
         padding:
@@ -43,12 +48,15 @@ class _CartaoAtrasoState extends State<CartaoAtraso> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        "E-mail: ${widget.atraso.email}",
+                        "E-mail: ${widget.atraso.email.toLowerCase()}",
                         style: Theme.of(context).textTheme.bodyText2,
                       ),
-                      SizedBox(height: 8.0),
                       Text(
-                        "Jornada: ${widget.atraso.jornada}",
+                        "Data: $dataAtraso",
+                        style: Theme.of(context).textTheme.bodyText2,
+                      ),
+                      Text(
+                        "Horário esperado: ${widget.atraso.jornada[0]}",
                         style: Theme.of(context).textTheme.bodyText2,
                       ),
                     ],
@@ -60,14 +68,15 @@ class _CartaoAtrasoState extends State<CartaoAtraso> {
                   child: Column(
                     children: [
                       Text(
-                        "Hora da Entrada",
+                        "Horário registrado",
                         // style: Theme.of(context).textTheme.body1,
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Text(widget.atraso.dataHoraAtraso,
+                      Text(
+                        horaAtraso,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 24,

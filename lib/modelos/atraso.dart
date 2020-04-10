@@ -6,7 +6,7 @@ class Atraso {
   String nome;
   String email;
   String dataHoraAtraso;
-  String jornada;
+  List<String> jornada;
 
   Atraso({
     this.codigoAtraso,
@@ -24,7 +24,7 @@ class Atraso {
       nome: map["nome"],
       email: map["email"],
       dataHoraAtraso: map["data_hora_atraso"],
-      jornada: map["jornada"],
+      jornada: List.from(map["jornada"]),
     );
   }
 
