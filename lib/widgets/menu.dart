@@ -1,3 +1,5 @@
+import 'package:bate_ponto_web/modelos/relatorio.dart';
+import 'package:bate_ponto_web/pages/relatorios.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
@@ -7,7 +9,6 @@ import '../pages/atrasos.dart';
 import '../pages/empregados.dart';
 import '../pages/login.dart';
 import 'app_route_observer.dart';
-
 
 class Menu extends StatefulWidget {
   const Menu({@required this.permanentlyDisplay, Key key}) : super(key: key);
@@ -88,8 +89,8 @@ class _MenuState extends State<Menu> with RouteAware {
                     Icons.people, Empregados.titulo, Empregados.rota),
                 _buildItemMenu(
                     Icons.question_answer, Abonos.titulo, Abonos.rota),
-                _buildItemMenu(
-                    Icons.alarm, Atrasos.titulo, Atrasos.rota),
+                _buildItemMenu(Icons.alarm, Atrasos.titulo, Atrasos.rota),
+                _buildItemMenu(Icons.assignment, Relatorios.titulo, Relatorios.rota),
                 const Divider(),
                 ListTile(
                     leading: const Icon(Icons.power_settings_new),

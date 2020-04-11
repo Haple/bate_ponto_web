@@ -22,7 +22,7 @@ class AtrasosState extends State<Atrasos> {
     super.initState();
   }
 
-  Future<List<Atraso>> buscaAtrasos() async {
+  Future<List<Atraso>> _buscaAtrasos() async {
     final token = await getToken();
     // final baseUrl = "https://bate-ponto-backend.herokuapp.com";
     final baseUrl =
@@ -47,7 +47,7 @@ class AtrasosState extends State<Atrasos> {
       pageTitle: Atrasos.titulo,
       body: SafeArea(
         child: FutureBuilder(
-          future: buscaAtrasos(),
+          future: _buscaAtrasos(),
           builder:
               (BuildContext context, AsyncSnapshot<List<Atraso>> snapshot) {
             if (snapshot == null || snapshot.hasError) {
