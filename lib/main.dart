@@ -1,4 +1,5 @@
 import 'package:bate_ponto_web/modelos/relatorio.dart';
+import 'package:bate_ponto_web/pages/indicadores.dart';
 
 import 'pages/atrasos.dart';
 import 'pages/relatorios.dart';
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
     Abonos.rota: (context) => Abonos(),
     Atrasos.rota: (context) => Atrasos(),
     Relatorios.rota: (context) => Relatorios(),
+    Indicadores.rota: (context) => Indicadores(),
   };
 
   @override
