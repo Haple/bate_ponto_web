@@ -21,21 +21,21 @@ class _CartaoIndicadorState extends State<CartaoIndicador> {
     return [
       new charts.Series<ResultadoIndicador, int>(
         id: 'Concordo',
-        colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
+        colorFn: (_, __) => charts.MaterialPalette.green.shadeDefault,
         domainFn: (ResultadoIndicador r, _) => r.mes,
         measureFn: (ResultadoIndicador r, _) => r.concordo,
         data: resultados,
       ),
       new charts.Series<ResultadoIndicador, int>(
         id: 'Neutro',
-        colorFn: (_, __) => charts.MaterialPalette.red.shadeDefault,
+        colorFn: (_, __) => charts.MaterialPalette.gray.shadeDefault,
         domainFn: (ResultadoIndicador r, _) => r.mes,
         measureFn: (ResultadoIndicador r, _) => r.neutro,
         data: resultados,
       ),
       new charts.Series<ResultadoIndicador, int>(
         id: 'Discordo',
-        colorFn: (_, __) => charts.MaterialPalette.green.shadeDefault,
+        colorFn: (_, __) => charts.MaterialPalette.red.shadeDefault,
         domainFn: (ResultadoIndicador r, _) => r.mes,
         measureFn: (ResultadoIndicador r, _) => r.discordo,
         data: resultados,
@@ -52,30 +52,35 @@ class _CartaoIndicadorState extends State<CartaoIndicador> {
         padding:
             const EdgeInsets.only(top: 12, left: 12, bottom: 20, right: 12),
         child: Row(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             SizedBox(
-              width: 250,
+              width: 300,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   //TOGGLE
                   Container(
-                    padding: EdgeInsets.only(left: 20),
+                    // padding: EdgeInsets.only(left: 20),
                     child: Text(
                       "${indicador.titulo}",
-                      style: Theme.of(context).textTheme.headline6,
+                      style: Theme.of(context).textTheme.headline5
                     ),
                   ),
                   Text(
                     "\"${indicador.mensagem}\"",
-                    style: Theme.of(context).textTheme.bodyText2,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontStyle: FontStyle.italic,
+                      // color: Colors.grey
+                    ),
+                    textAlign: TextAlign.center,
                   ),
                 ],
               ),
             ),
             Column(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Container(
                   alignment: Alignment.center,
@@ -87,17 +92,9 @@ class _CartaoIndicadorState extends State<CartaoIndicador> {
                     _convertResultsToChartData(indicador.resultados),
                     defaultRenderer: new charts.LineRendererConfig(),
                     animate: true,
+                    behaviors: [new charts.SeriesLegend()],
                   ),
                 ),
-                // SizedBox(
-                //   height: 300,
-                //   width: 800,
-                //   child: charts.LineChart(
-                //     _convertResultsToChartData(indicador.resultados),
-                //     defaultRenderer: new charts.LineRendererConfig(),
-                //     animate: true,
-                //   ),
-                // ),
               ],
             )
           ],

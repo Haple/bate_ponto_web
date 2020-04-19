@@ -6,7 +6,7 @@ class Atraso {
   String nome;
   String email;
   String dataHoraAtraso;
-  List<String> jornada;
+  String horarioEsperado;
 
   Atraso({
     this.codigoAtraso,
@@ -14,7 +14,7 @@ class Atraso {
     this.nome,
     this.email,
     this.dataHoraAtraso,
-    this.jornada,
+    this.horarioEsperado,
   });
 
   factory Atraso.fromJson(Map<String, dynamic> map) {
@@ -24,7 +24,7 @@ class Atraso {
       nome: map["nome"],
       email: map["email"],
       dataHoraAtraso: map["data_hora_atraso"],
-      jornada: List.from(map["jornada"]),
+      horarioEsperado: map["horario_esperado"],
     );
   }
 
@@ -35,7 +35,7 @@ class Atraso {
       "nome": nome,
       "email": email,
       "data_hora_atraso": dataHoraAtraso,
-      "jornada": jornada,
+      "horario_esperado": horarioEsperado,
     };
   }
 

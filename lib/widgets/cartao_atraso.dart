@@ -56,7 +56,7 @@ class _CartaoAtrasoState extends State<CartaoAtraso> {
                         style: Theme.of(context).textTheme.bodyText2,
                       ),
                       Text(
-                        "Horário esperado: ${widget.atraso.jornada[0]}",
+                        "Horário esperado: ${widget.atraso.horarioEsperado}",
                         style: Theme.of(context).textTheme.bodyText2,
                       ),
                     ],

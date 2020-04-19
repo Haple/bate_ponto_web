@@ -81,7 +81,7 @@ class _MenuState extends State<Menu> with RouteAware {
         children: [
           Expanded(
             child: ListView(
-              padding: EdgeInsets.zero,
+              padding: EdgeInsets.only(top: 30, bottom: 20),
               // padding: EdgeInsets.all(10),
               children: [
                 logo,
