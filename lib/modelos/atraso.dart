@@ -19,7 +19,7 @@ class Atraso {
 
   factory Atraso.fromJson(Map<String, dynamic> map) {
     return Atraso(
-      codigoAtraso: int.parse(map["codigo_atraso"]),
+      codigoAtraso: map["codigo"],
       codigoEmpregado: map["codigo_empregado"],
       nome: map["nome"],
       email: map["email"],

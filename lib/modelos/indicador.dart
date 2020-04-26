@@ -24,7 +24,7 @@ class Indicador {
     });
 
     return Indicador(
-      codigoIndicador: map["codigo_indicador"],
+      codigoIndicador: map["codigo"],
       ativado: map["ativado"],
       titulo: map["titulo"],
       mensagem: map["mensagem"],

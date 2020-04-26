@@ -1,8 +1,6 @@
-import 'package:bate_ponto_web/modelos/relatorio.dart';
 import 'package:bate_ponto_web/pages/indicadores.dart';
 
 import 'pages/atrasos.dart';
-import 'pages/relatorios.dart';
 import 'widgets/app_route_observer.dart';
 import 'pages/empregados.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +17,6 @@ class MyApp extends StatelessWidget {
     Empregados.rota: (context) => Empregados(),
     Abonos.rota: (context) => Abonos(),
     Atrasos.rota: (context) => Atrasos(),
-    Relatorios.rota: (context) => Relatorios(),
     Indicadores.rota: (context) => Indicadores(),
   };
 

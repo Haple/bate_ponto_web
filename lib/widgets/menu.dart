@@ -1,5 +1,4 @@
 import 'package:bate_ponto_web/pages/indicadores.dart';
-import 'package:bate_ponto_web/pages/relatorios.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
@@ -91,7 +90,6 @@ class _MenuState extends State<Menu> with RouteAware {
                     Icons.question_answer, Abonos.titulo, Abonos.rota),
                 _buildItemMenu(Icons.trending_up, Indicadores.titulo, Indicadores.rota),
                 _buildItemMenu(Icons.alarm, Atrasos.titulo, Atrasos.rota),
-                _buildItemMenu(Icons.assignment, Relatorios.titulo, Relatorios.rota),
                 const Divider(),
                 ListTile(
                     leading: const Icon(Icons.power_settings_new),
@@ -117,7 +115,7 @@ class _MenuState extends State<Menu> with RouteAware {
     if (widget.permanentlyDisplay) {
       Navigator.pop(context);
     }
-    await Navigator.pushReplacementNamed(context, rota);
+    await Navigator.of(context).pushNamed(rota);
   }
 
   void _updateSelectedRoute() {

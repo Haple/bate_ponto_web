@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bate_ponto_web/modelos/atraso.dart';
 import 'package:bate_ponto_web/widgets/cartao_atraso.dart';
 import 'package:flutter/material.dart';
@@ -24,13 +26,11 @@ class AtrasosState extends State<Atrasos> {
 
   Future<List<Atraso>> _buscaAtrasos() async {
     final token = await getToken();
-    // final baseUrl = "https://bate-ponto-backend.herokuapp.com";
-    final baseUrl =
-        "https://5e8fbe83fe7f2a00165ef56d.mockapi.io/bate-ponto/api/v1";
+    final baseUrl = "https://bate-ponto-backend.herokuapp.com";
     final url = "$baseUrl/atrasos";
 
     Map<String, String> headers = {
-      // 'Authorization': token,
+      'Authorization': token,
     };
     final response = await http.get(url, headers: headers);
     if (response.statusCode == 200) {
@@ -51,6 +51,8 @@ class AtrasosState extends State<Atrasos> {
           builder:
               (BuildContext context, AsyncSnapshot<List<Atraso>> snapshot) {
             if (snapshot == null || snapshot.hasError) {
+              log("ERRO: " + snapshot.toString());
+              print("ERRRRRO: " + snapshot.toString());
               return Center(
                 child: Text("Não foi possível buscar os atrasos"),
               );

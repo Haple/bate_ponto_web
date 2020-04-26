@@ -1,8 +1,6 @@
 import 'dart:convert';
 
-import 'package:bate_ponto_web/modelos/atraso.dart';
 import 'package:bate_ponto_web/modelos/indicador.dart';
-import 'package:bate_ponto_web/widgets/cartao_atraso.dart';
 import 'package:bate_ponto_web/widgets/cartao_indicador.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -28,13 +26,11 @@ class IndicadoresState extends State<Indicadores> {
 
   Future<List<Indicador>> _buscaIndicadores() async {
     final token = await getToken();
-    // final baseUrl = "https://bate-ponto-backend.herokuapp.com";
-    final baseUrl =
-        "https://5e8fbe83fe7f2a00165ef56d.mockapi.io/bate-ponto/api/v1";
-    final url = "$baseUrl/indicadores";
+    final baseUrl = "https://bate-ponto-backend.herokuapp.com";
+    final url = "$baseUrl/indicadores/resultados";
 
     Map<String, String> headers = {
-      // 'Authorization': token,
+      'Authorization': token,
     };
     final response = await http.get(url, headers: headers);
     if (response.statusCode == 200) {

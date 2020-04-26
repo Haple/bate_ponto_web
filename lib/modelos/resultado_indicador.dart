@@ -2,12 +2,14 @@ import 'dart:convert';
 
 class ResultadoIndicador {
 
+  String periodo;
   int mes;
   int concordo;
   int neutro;
   int discordo;
 
   ResultadoIndicador({
+    this.periodo,
     this.mes,
     this.concordo,
     this.neutro,
@@ -16,6 +18,7 @@ class ResultadoIndicador {
 
   factory ResultadoIndicador.fromJson(Map<String, dynamic> map) {
     return ResultadoIndicador(
+      periodo: map["periodo"],
       mes: map["mes"],
       concordo: map["concordo"],
       neutro: map["neutro"],
@@ -25,6 +28,7 @@ class ResultadoIndicador {
 
   Map<String, dynamic> toJson() {
     return {
+      "periodo": periodo,
       "mes": mes,
       "concordo": concordo,
       "neutro": neutro,
