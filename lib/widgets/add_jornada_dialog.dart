@@ -60,7 +60,7 @@ class _AddJornadaDialogState extends State<AddJornadaDialog> {
     if (response.statusCode == 201) {
       exibeAlerta(
         contexto: context,
-        titulo: "Tudo certo",
+        titulo: "Tudo certo!",
         mensagem: "A jornada foi cadastrada!",
         labelBotao: "Ok",
         evento: () {
@@ -74,22 +74,22 @@ class _AddJornadaDialogState extends State<AddJornadaDialog> {
       if (responseJson['erro'] != null)
         exibeAlerta(
           contexto: context,
-          titulo: "Opa",
+          titulo: "Opa!",
           mensagem: "${responseJson['erro']}",
           labelBotao: "Tentar novamente",
         );
       else if (responseJson['erros'] != null)
         exibeAlerta(
           contexto: context,
-          titulo: "Opa",
+          titulo: "Opa!",
           mensagem: "${responseJson['erros'][0]['erro']}",
           labelBotao: "Tentar novamente",
         );
       else
         exibeAlerta(
           contexto: context,
-          titulo: "Opa",
-          mensagem: "Não foi possível criar uma jornada",
+          titulo: "Opa!",
+          mensagem: "Não foi possível criar uma jornada!",
           labelBotao: "Tentar novamente",
         );
     }
@@ -99,7 +99,7 @@ class _AddJornadaDialogState extends State<AddJornadaDialog> {
   Widget build(BuildContext context) {
     final titulo = new Center(
       child: new Text(
-        "Nova jornada",
+        "Nova Jornada",
         style: TextStyle(
           fontSize: 24.0,
         ),

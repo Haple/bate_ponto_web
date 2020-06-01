@@ -64,8 +64,8 @@ class _CadastroEmpregadoState extends State<CadastroEmpregado> {
     if (response.statusCode == 201) {
       exibeAlerta(
         contexto: context,
-        titulo: "Tudo certo",
-        mensagem: "O empregado foi cadastrado!",
+        titulo: "Tudo certo!",
+        mensagem: "O colaborador foi cadastrado!",
         labelBotao: "Ok",
         evento: () => Navigator.of(context).pushNamed(Empregados.rota),
       );
@@ -73,16 +73,16 @@ class _CadastroEmpregadoState extends State<CadastroEmpregado> {
       if (responseJson['erro'] != null)
         exibeAlerta(
           contexto: context,
-          titulo: "Opa",
+          titulo: "Opa!",
           mensagem: "${responseJson['erro']}",
-          labelBotao: "Tentar novamente",
+          labelBotao: "Tentar Novamente",
         );
       else
         exibeAlerta(
           contexto: context,
-          titulo: "Opa",
-          mensagem: "Não foi possível criar um empregado",
-          labelBotao: "Tentar novamente",
+          titulo: "Opa!",
+          mensagem: "Não foi possível criar um Colaborador!",
+          labelBotao: "Tentar Novamente",
         );
     }
   }
@@ -91,7 +91,7 @@ class _CadastroEmpregadoState extends State<CadastroEmpregado> {
   Widget build(BuildContext context) {
     var titulo = new Center(
       child: new Text(
-        "Cadastro de empregado",
+        "Cadastro de Colaborador",
         style: TextStyle(
           fontSize: 24.0,
         ),

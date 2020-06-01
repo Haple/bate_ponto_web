@@ -11,7 +11,7 @@ import 'cadastro_empregado.dart';
 
 class Empregados extends StatefulWidget {
   static String rota = '/empregados';
-  static String titulo = 'Empregados';
+  static String titulo = 'Colaboradores';
 
   @override
   EmpregadosState createState() => new EmpregadosState();
@@ -44,7 +44,7 @@ class EmpregadosState extends State<Empregados> {
     if (response.statusCode == 200) {
       return empregadosFromJson(response.body);
     } else {
-      throw new Exception("Não foi possível buscar os empregados");
+      throw new Exception("Não foi possível buscar os colaboradores!");
     }
   }
 
@@ -68,7 +68,7 @@ class EmpregadosState extends State<Empregados> {
             child: TextField(
               controller: _pesquisa,
               decoration: InputDecoration(
-                hintText: "Pesquisar empregado",
+                hintText: "Pesquisar Colaborador",
                 suffixIcon: FlatButton(
                   child: Icon(Icons.search),
                   onPressed: () {
@@ -103,7 +103,7 @@ class EmpregadosState extends State<Empregados> {
               (BuildContext context, AsyncSnapshot<List<Empregado>> snapshot) {
             if (snapshot == null || snapshot.hasError) {
               return Center(
-                child: Text("Não foi possível buscar os empregados"),
+                child: Text("Não foi possível buscar os colaboradores!"),
               );
             } else if (snapshot.connectionState == ConnectionState.done) {
               List<Empregado> empregados = snapshot.data;

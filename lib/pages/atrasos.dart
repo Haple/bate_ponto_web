@@ -36,7 +36,7 @@ class AtrasosState extends State<Atrasos> {
     if (response.statusCode == 200) {
       return atrasosFromJson(response.body);
     } else {
-      throw new Exception("Não foi possível buscar os atrasos");
+      throw new Exception("Não foi possível buscar os atrasos!");
     }
   }
 
@@ -54,7 +54,7 @@ class AtrasosState extends State<Atrasos> {
               log("ERRO: " + snapshot.toString());
               print("ERRRRRO: " + snapshot.toString());
               return Center(
-                child: Text("Não foi possível buscar os atrasos"),
+                child: Text("Não foi possível buscar os atrasos!"),
               );
             } else if (snapshot.connectionState == ConnectionState.done) {
               List<Atraso> atrasos = snapshot.data;

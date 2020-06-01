@@ -12,7 +12,7 @@ import '../widgets/menu_scaffold.dart';
 
 class Abonos extends StatefulWidget {
   static String rota = '/abonos';
-  static String titulo = 'Pedidos de abonos';
+  static String titulo = 'Pedidos de Abono';
   @override
   AbonosState createState() => new AbonosState();
 }
@@ -38,7 +38,7 @@ class AbonosState extends State<Abonos> {
     if (response.statusCode == 200) {
       return abonosFromJson(response.body);
     } else {
-      throw new Exception("Não foi possível buscar os abonos");
+      throw new Exception("Não foi possível buscar os abonos!");
     }
   }
 
@@ -61,7 +61,7 @@ class AbonosState extends State<Abonos> {
       // html.window.open(anexoUrl, nomeOriginal);
       html.window.location.replace(anexoUrl);
     } else {
-      throw new Exception("Não foi possível baixar anexo");
+      throw new Exception("Não foi possível baixar anexo!");
     }
 
     // html.Element a = html.document.createElement("a");
@@ -222,7 +222,7 @@ class AbonosState extends State<Abonos> {
                   (BuildContext context, AsyncSnapshot<List<Abono>> snapshot) {
                 if (snapshot == null || snapshot.hasError) {
                   return Center(
-                    child: Text("Não foi possível buscar os abonos"),
+                    child: Text("Não foi possível buscar os abonos!"),
                   );
                 } else if (snapshot.connectionState == ConnectionState.done) {
                   List<Abono> abonos = snapshot.data;

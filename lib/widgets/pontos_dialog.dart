@@ -45,7 +45,7 @@ class _PontosDialogState extends State<PontosDialog> {
                 (BuildContext context, AsyncSnapshot<List<Ponto>> snapshot) {
               if (snapshot == null || snapshot.hasError) {
                 return Center(
-                  child: Text("Não foi possível buscar os pontos"),
+                  child: Text("Não foi possível buscar os pontos!"),
                 );
               } else if (snapshot.connectionState == ConnectionState.done) {
                 List<Ponto> pontos = snapshot.data;
@@ -111,7 +111,7 @@ class _PontosDialogState extends State<PontosDialog> {
       itemCount: pontos.length,
     );
 
-    if (pontos.length == 0) lista = Text("Nenhum ponto registrado");
+    if (pontos.length == 0) lista = Text("Nenhum ponto registrado!");
 
     return Center(
       child: Container(
@@ -135,7 +135,7 @@ class _PontosDialogState extends State<PontosDialog> {
     if (response.statusCode == 200) {
       return pontosFromJson(response.body);
     } else {
-      throw new Exception("Não foi possível buscar os pontos");
+      throw new Exception("Não foi possível buscar os pontos!");
     }
   }
 }

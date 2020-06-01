@@ -40,7 +40,7 @@ class _SenhaState extends State<Senha> {
         RegExp regex = new RegExp(pattern);
         if (!regex.hasMatch(valor))
           return 'A senha deve ser uma mistura de letras minúsculas,' +
-              ' maiúsculas, números e caracteres especiais';
+              ' maiúsculas, números e caracteres especiais!';
         else
           return null;
       },

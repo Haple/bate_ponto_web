@@ -58,7 +58,7 @@ class _AddAvaliacaoDialogState extends State<AddAvaliacaoDialog> {
     if (response.statusCode == 200) {
       exibeAlerta(
         contexto: context,
-        titulo: "Tudo certo",
+        titulo: "Tudo certo!",
         mensagem: "Abono avaliado com sucesso!",
         labelBotao: "Ok",
         evento: () {
@@ -70,15 +70,15 @@ class _AddAvaliacaoDialogState extends State<AddAvaliacaoDialog> {
       if (responseJson['erro'] != null)
         exibeAlerta(
           contexto: context,
-          titulo: "Opa",
+          titulo: "Opa!",
           mensagem: "${responseJson['erro']}",
           labelBotao: "Tentar novamente",
         );
       else
         exibeAlerta(
           contexto: context,
-          titulo: "Opa",
-          mensagem: "Não foi possível avaliar o abono",
+          titulo: "Opa!",
+          mensagem: "Não foi possível avaliar o abono!",
           labelBotao: "Tentar novamente",
         );
     }
@@ -102,7 +102,7 @@ class _AddAvaliacaoDialogState extends State<AddAvaliacaoDialog> {
         minLines: 3,
         maxLines: 8,
         autofocus: false,
-        validator: (valor) => valor.isEmpty? "Avaliação obrigatória": null,
+        validator: (valor) => valor.isEmpty? "Avaliação obrigatória!": null,
         decoration: new InputDecoration(
           border: OutlineInputBorder(),
         ),

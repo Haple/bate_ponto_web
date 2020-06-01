@@ -22,7 +22,7 @@ class _NomeCompletoState extends State<NomeCompleto> {
       autofocus: false,
       validator: (valor) => valor.isEmpty ? 'Nome é obrigatório' : null,
       decoration: new InputDecoration(
-        labelText: "Nome completo",
+        labelText: "Nome Completo",
       ),
     );
   }

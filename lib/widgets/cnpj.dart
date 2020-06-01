@@ -22,7 +22,7 @@ class _CnpjState extends State<Cnpj> {
       keyboardType: TextInputType.emailAddress,
       autofocus: false,
       validator: (valor) =>
-          CNPJValidator.isValid(valor) ? null : 'CNPJ inválido',
+          CNPJValidator.isValid(valor) ? null : 'CNPJ inválido!',
       decoration: new InputDecoration(
         labelText: "CNPJ",
         hintText: "00.000.000/0000-00",

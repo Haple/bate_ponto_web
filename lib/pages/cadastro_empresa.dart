@@ -82,7 +82,7 @@ class _CadastroEmpresaState extends State<CadastroEmpresa> {
     if (response.statusCode == 201) {
       exibeAlerta(
         contexto: context,
-        titulo: "Tudo certo",
+        titulo: "Tudo certo!",
         mensagem:
             "A empresa foi cadastrada! Não esqueça de conferir seu e-mail.",
         labelBotao: "Fazer login",
@@ -91,9 +91,9 @@ class _CadastroEmpresaState extends State<CadastroEmpresa> {
     } else {
       exibeAlerta(
         contexto: context,
-        titulo: "Opa",
+        titulo: "Opa!",
         mensagem: responseJson["erro"],
-        labelBotao: "Tentar novamente",
+        labelBotao: "Tentar Novamente",
       );
     }
   }

@@ -56,7 +56,7 @@ class _CartaoAtrasoState extends State<CartaoAtraso> {
                         style: Theme.of(context).textTheme.bodyText2,
                       ),
                       Text(
-                        "Horário esperado: ${widget.atraso.horarioEsperado}",
+                        "Horário Esperado: ${widget.atraso.horarioEsperado}",
                         style: Theme.of(context).textTheme.bodyText2,
                       ),
                     ],
@@ -68,7 +68,7 @@ class _CartaoAtrasoState extends State<CartaoAtraso> {
                   child: Column(
                     children: [
                       Text(
-                        "Horário registrado",
+                        "Horário Registrado",
                         // style: Theme.of(context).textTheme.body1,
                         style: TextStyle(
                           fontSize: 12,

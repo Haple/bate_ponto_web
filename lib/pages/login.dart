@@ -71,9 +71,9 @@ class _LoginState extends State<Login> {
     }
     exibeAlerta(
       contexto: context,
-      titulo: "Opa",
-      mensagem: "Credenciais inválidas",
-      labelBotao: "Tentar novamente",
+      titulo: "Opa!",
+      mensagem: "Credenciais inválidas!",
+      labelBotao: "Tentar Novamente",
     );
   }
 
