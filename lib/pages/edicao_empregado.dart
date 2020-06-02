@@ -79,8 +79,8 @@ class _EdicaoEmpregadoState extends State<EdicaoEmpregado> {
     if (response.statusCode == 200) {
       exibeAlerta(
         contexto: context,
-        titulo: "Tudo certo",
-        mensagem: "Empregado editado!",
+        titulo: "Tudo certo!",
+        mensagem: "Colaborador Editado",
         labelBotao: "Ok",
         evento: () => Navigator.of(context).pushNamed(Empregados.rota),
       );
@@ -88,16 +88,16 @@ class _EdicaoEmpregadoState extends State<EdicaoEmpregado> {
       if (responseJson['erro'] != null)
         exibeAlerta(
           contexto: context,
-          titulo: "Opa",
+          titulo: "Opa!",
           mensagem: "${responseJson['erro']}",
-          labelBotao: "Tentar novamente",
+          labelBotao: "Tentar Novamente",
         );
       else
         exibeAlerta(
           contexto: context,
-          titulo: "Opa",
-          mensagem: "Não foi possível editar o empregado",
-          labelBotao: "Tentar novamente",
+          titulo: "Opa!",
+          mensagem: "Não foi possível editar o colaborador!",
+          labelBotao: "Tentar Novamente",
         );
     }
   }
@@ -106,7 +106,7 @@ class _EdicaoEmpregadoState extends State<EdicaoEmpregado> {
   Widget build(BuildContext context) {
     var titulo = new Center(
       child: new Text(
-        "Editar empregado",
+        "Editar Colaborador",
         style: TextStyle(
           fontSize: 24.0,
         ),

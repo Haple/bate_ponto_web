@@ -36,7 +36,7 @@ class IndicadoresState extends State<Indicadores> {
     if (response.statusCode == 200) {
       return indicadoresFromJson(Utf8Decoder().convert(response.bodyBytes));
     } else {
-      throw new Exception("Não foi possível buscar os indicadores");
+      throw new Exception("Não foi possível buscar os indicadores!");
     }
   }
 
@@ -53,7 +53,7 @@ class IndicadoresState extends State<Indicadores> {
             if (snapshot == null || snapshot.hasError) {
               print("ERRO: " + snapshot.toString());
               return Center(
-                child: Text("Não foi possível buscar os indicadores"),
+                child: Text("Não foi possível buscar os indicadores!"),
               );
             } else if (snapshot.connectionState == ConnectionState.done) {
               List<Indicador> indicadores = snapshot.data;

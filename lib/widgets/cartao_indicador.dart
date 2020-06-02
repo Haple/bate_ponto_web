@@ -44,7 +44,7 @@ class _CartaoIndicadorState extends State<CartaoIndicador> {
       if (response.statusCode == 200) {
         exibeAlerta(
           contexto: context,
-          titulo: "Tudo certo",
+          titulo: "Tudo certo!",
           mensagem: "Indicador configurado com sucesso!",
           labelBotao: "Ok",
         );
@@ -53,14 +53,14 @@ class _CartaoIndicadorState extends State<CartaoIndicador> {
         if (responseJson['erro'] != null)
           exibeAlerta(
             contexto: context,
-            titulo: "Opa",
+            titulo: "Opa!",
             mensagem: "${responseJson['erro']}",
             labelBotao: "Tentar novamente",
           );
         else
           exibeAlerta(
             contexto: context,
-            titulo: "Opa",
+            titulo: "Opa!",
             mensagem: "Não foi possível configurar o indicador.",
             labelBotao: "Tentar novamente",
           );

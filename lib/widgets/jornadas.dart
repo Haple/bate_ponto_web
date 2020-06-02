@@ -39,7 +39,7 @@ class JornadasState extends State<Jornadas> {
     if (response.statusCode == 200) {
       return jornadasFromJson(response.body);
     } else {
-      throw new Exception("Não foi possível buscar as jornadas");
+      throw new Exception("Não foi possível buscar as jornadas!");
     }
   }
 
@@ -55,15 +55,15 @@ class JornadasState extends State<Jornadas> {
       if (responseJson['erro'] != null)
         exibeAlerta(
           contexto: context,
-          titulo: "Opa",
+          titulo: "Opa!",
           mensagem: "${responseJson['erro']}",
           labelBotao: "Tentar novamente",
         );
       else
         exibeAlerta(
           contexto: context,
-          titulo: "Opa",
-          mensagem: "Não foi possível deletar a jornada",
+          titulo: "Opa!",
+          mensagem: "Não foi possível deletar a jornada!",
           labelBotao: "Tentar novamente",
         );
     } else {
@@ -79,7 +79,7 @@ class JornadasState extends State<Jornadas> {
       child: Row(
         children: [
           Icon(Icons.add),
-          Text("Nova jornada"),
+          Text("Nova jornada!"),
         ],
         mainAxisAlignment: MainAxisAlignment.center,
       ),
@@ -106,7 +106,7 @@ class JornadasState extends State<Jornadas> {
                       onPressed: () => {
                         exibeConfirmacao(
                           contexto: context,
-                          titulo: "Opa",
+                          titulo: "Opa!",
                           mensagem: "Que realmente deletar a jornada '$nome'?",
                           labelConfirmar: "Sim, quero deletar",
                           eventoConfirmar: () async {
@@ -139,7 +139,7 @@ class JornadasState extends State<Jornadas> {
         ));
       } else {
         items.add(itemJornada(
-          nome: "Filtrar por jornada",
+          nome: "Filtrar por Jornada",
           codigo: 0,
         ));
       }
@@ -151,7 +151,7 @@ class JornadasState extends State<Jornadas> {
         items: items,
         value: codigoJornada,
         validator: (value) =>
-            codigoJornada == 0 ? 'Jornada é obrigatória' : null,
+            codigoJornada == 0 ? 'Jornada é obrigatória!' : null,
         onChanged: (value) {
           setState(() {
             codigoJornada = value;
@@ -167,7 +167,7 @@ class JornadasState extends State<Jornadas> {
         builder: (BuildContext context, AsyncSnapshot<List<Jornada>> snapshot) {
           if (snapshot == null || snapshot.hasError) {
             return Center(
-              child: Text("Não foi possível buscar as jornadas"),
+              child: Text("Não foi possível buscar as jornadas!"),
             );
           } else if (snapshot.connectionState == ConnectionState.done) {
             List<Jornada> jornadas = snapshot.data;

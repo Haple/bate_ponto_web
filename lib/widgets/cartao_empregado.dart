@@ -35,15 +35,15 @@ class _CartaoEmpregadoState extends State<CartaoEmpregado> {
       if (responseJson['erro'] != null)
         exibeAlerta(
           contexto: context,
-          titulo: "Opa",
+          titulo: "Opa!",
           mensagem: "${responseJson['erro']}",
           labelBotao: "Tentar novamente",
         );
       else
         exibeAlerta(
           contexto: context,
-          titulo: "Opa",
-          mensagem: "Não foi possível deletar o empregado",
+          titulo: "Opa!",
+          mensagem: "Não foi possível deletar o empregado!",
           labelBotao: "Tentar novamente",
         );
     } else {
@@ -110,7 +110,7 @@ class _CartaoEmpregadoState extends State<CartaoEmpregado> {
                               contexto: context,
                               labelConfirmar: "Sim, quero deletar",
                               labelCancelar: "Cancelar",
-                              titulo: "Opa",
+                              titulo: "Opa!",
                               mensagem:
                                   "Quer mesmo deletar '${widget.empregado.nome}'?",
                               eventoConfirmar: () =>
@@ -152,7 +152,7 @@ class _CartaoEmpregadoState extends State<CartaoEmpregado> {
                   child: Column(
                     children: [
                       Text(
-                        "Saldo atual",
+                        "Saldo Atual",
                         // style: Theme.of(context).textTheme.body1,
                         style: TextStyle(
                           fontSize: 12,

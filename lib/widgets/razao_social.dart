@@ -20,9 +20,9 @@ class _RazaoSocialState extends State<RazaoSocial> {
       controller: widget.controller,
       keyboardType: TextInputType.emailAddress,
       autofocus: false,
-      validator: (valor) => valor.isEmpty ? 'Razão social inválida' : null,
+      validator: (valor) => valor.isEmpty ? 'Razão social inválida!' : null,
       decoration: new InputDecoration(
-        labelText: "Razão social",
+        labelText: "Razão Social",
         hintText: "Alpargatas S/A",
       ),
     );
